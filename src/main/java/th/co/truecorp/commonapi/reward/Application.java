@@ -14,8 +14,6 @@ import th.co.truecorp.commonlib.configuration.TrueAppConfig;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan("th.co.truecorp.*")
-@EnableConfigurationProperties(TrueAppConfig.class)
 public class Application {
 	protected static Logger logger = LoggerFactory.getLogger(Application.class);
 

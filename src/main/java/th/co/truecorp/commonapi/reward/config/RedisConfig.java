@@ -20,7 +20,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import th.co.truecorp.commonlib.jpa.service.ConfigService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -41,9 +40,6 @@ public class RedisConfig implements InitializingBean, DisposableBean {
     private int database;
     @Value("${spring.redis.ssl}")
     private boolean enableSSL;
-
-    @Autowired
-    private ConfigService configService;
 
     @Bean
     @Primary
