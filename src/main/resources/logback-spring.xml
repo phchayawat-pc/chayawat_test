@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <springProperty scope="context" name="domain" source="app.domain"/>
+    <springProperty scope="context" name="app" source="app.name"/>
+    <springProperty scope="context" name="zone" source="app.zone"/>
+    <springProperty scope="context" name="pod_name" source="MY_POD_NAME" defaultValue="LOCALHOST"/>
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+    <appender name="endpoint_log"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/logs/CommonBE_${pod_name}_${app}_Endpoint.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>
+                /logs/CommonBE_${pod_name}_${app}_Endpoint.log.%d{yyyyMMdd}.%i</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="th.co.truecorp.commonlib.log.filter.ContentFilter"/>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames
+                    class="net.logstash.logback.fieldnames.ShortenedFieldNames">
+                <version>[ignore]</version>
+                <levelValue>[ignore]</levelValue>
+            </fieldNames>
+        </encoder>
+    </appender>
+    <appender name="tran_log"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/logs/CommonBE_${pod_name}_${app}_Transaction.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>
+                /logs/CommonBE_${pod_name}_${app}_Transaction.log.%d{yyyyMMdd}.%i</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="th.co.truecorp.commonlib.log.filter.ContentFilter"/>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames
+                    class="net.logstash.logback.fieldnames.ShortenedFieldNames">
+                <version>[ignore]</version>
+                <levelValue>[ignore]</levelValue>
+            </fieldNames>
+        </encoder>
+    </appender>
+    <appender name="debug_log"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/logs/CommonBE_${pod_name}_${app}_Debug.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>
+                /logs/CommonBE_${pod_name}_${app}_Debug.log.%d{yyyyMMddHH}.%i</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <maxFileSize>100MB</maxFileSize>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{YYYY-MM-dd'T'HH:mm:ss.SSS}|%-5level|%X{ssId}|%X{reqTxId}|%X{txId}|%X{sourceSystem}|%X{digitalId}|%X{brand}|%thread|%X{mode}|%logger{36}|%msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{YYYY-MM-dd'T'HH:mm:ss.SSS}|%-5level|%X{ssId}|%X{reqTxId}|%X{txId}|%X{sourceSystem}|%X{digitalId}|%X{brand}|%thread|%X{mode}|%logger{36}|%msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="debug_log"/>
+    </root>
+    <logger name="stash-endpoint" additivity="false">
+        <appender-ref ref="endpoint_log"/>
+    </logger>
+    <logger name="stash" additivity="false">
+        <appender-ref ref="tran_log"/>
+    </logger>
+    <logger name="org.hibernate.SQL" additivity="false" level="DEBUG">
+        <appender-ref ref="debug_log"/>
+    </logger>
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="WARN"/>
+</configuration>

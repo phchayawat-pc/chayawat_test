@@ -1,0 +1,45 @@
+{
+  "code":"0",
+  "description":"Success",
+  "timestamp":"",
+  "content":{
+    "code":"10001",
+    "platform_module":10001,
+    "report_dashboard":1,
+    "message":"Success",
+    "data":{
+      "display_country":"th",
+      "display_lang":"th",
+      "id":"vjxWalDz7RLV",
+      "content_type":"trueyouarticle",
+      "title":"365 ??? ?????????????? ???????????? ?????????????????",
+      "article_category":[
+        "themetic"
+      ],
+      "thumb":"https://cms.dmpcdn.com/trueyouarticle/2024/10/21/63457460-8f70-11ef-bb68-ed6c314d2d9b_webp_original.webp",
+      "status":"publish",
+      "publish_date":"",
+      "create_date":"",
+      "update_date":"",
+      "searchable":"Y",
+      "create_by":"supanita",
+      "create_by_ssoid":"72242009",
+      "update_by":"pishsinee.p",
+      "update_by_ssoid":"37183481",
+      "source_country":"th",
+      "detail":"",
+      "thumb_list":{
+        "highlight16x9":"https://cms.dmpcdn.com/trueyouarticle/2024/10/21/63457460-8f70-11ef-bb68-ed6c314d2d9b_webp_original.webp",
+        "image_coupon":"https://cms.dmpcdn.com/trueyouarticle/2024/10/21/63457460-8f70-11ef-bb68-ed6c314d2d9b_webp_original.webp"
+      },
+      "setting":{
+        "shelf_id_1":"",
+        "shelf_ids":"",
+        "shelf_title_1":"",
+        "thematic_main_shelf_ids":"4NpjqAEgWmKo",
+        "themetic_color":""
+      },
+      "share_url":""
+    }
+  }
+}

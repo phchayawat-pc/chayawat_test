@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+
+  pre_build:
+    commands:
+      - export STAMP="1.0-`date +%Y%m%d.%H%M%S`"
+      - echo getting the token...
+      - export CODEARTIFACT_TOKEN=`aws codeartifact get-authorization-token --domain ${CODEARTIFACT_DOMAIN} --domain-owner ${SOURCE_ACC_NO} --query authorizationToken --output text`
+
+  build:
+    commands:
+      - echo mvn build package...
+      - mvn --no-transfer-progress versions:set -DnewVersion=$STAMP
+      - mvn --no-transfer-progress -s settings.xml clean package
+      - echo build completed
+
+  post_build:
+    commands:
+      - echo copy Dockerfile...
+      - cp $CODEBUILD_SRC_DIR/Dockerfile target/
+      - cp $CODEBUILD_SRC_DIR/*.yml target/
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: target
+
+cache:
+  paths:
+    - '/root/.m2/**/*'

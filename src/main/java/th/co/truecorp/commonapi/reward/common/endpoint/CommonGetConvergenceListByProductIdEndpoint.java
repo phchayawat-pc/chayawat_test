@@ -1,0 +1,101 @@
+package th.co.truecorp.commonapi.reward.common.endpoint;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.stereotype.Component;
+import th.co.truecorp.commonapi.reward.common.model.GetConvergenceListReq;
+import th.co.truecorp.commonapi.reward.common.model.GetConvergenceListResp;
+import th.co.truecorp.commonapi.reward.constant.Constant;
+import th.co.truecorp.commonlib.constant.ComnConst;
+import th.co.truecorp.commonlib.constant.LoggingKey;
+import th.co.truecorp.commonlib.jpa.service.ResultService;
+import th.co.truecorp.commonlib.log.annotation.EndpointLog;
+import th.co.truecorp.commonlib.log.context.EndpointLogContext;
+import th.co.truecorp.commonlib.log.context.LogContextService;
+import th.co.truecorp.commonlib.log.model.EndpointResult;
+
+import th.co.truecorp.commonlib.model.AccessTokenJWTPayload;
+import th.co.truecorp.commonlib.service.APIGWService;
+
+import th.co.truecorp.commonlib.service.CommonBEService;
+import th.co.truecorp.commonlib.util.LoggerParameterUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
+public class CommonGetConvergenceListByProductIdEndpoint {
+
+    private static final Logger log = LoggerFactory.getLogger(CommonGetConvergenceListByProductIdEndpoint.class);
+
+    @Autowired
+    private LogContextService logContextService;
+
+    @Autowired
+    private ResultService resultService;
+
+    @Autowired
+    private CommonBEService commonBEService;
+
+    @EndpointLog(name = Constant.ENDPOINT_SOURCE_SYSTEM_ID_COMMONBE + ".ProfileGetConvergenceListByProductId")
+    public EndpointResult getCommonService(Map<String, Object> tv) {
+        EndpointLogContext logContext = logContextService.getEndpointLoggingContext();
+        try {
+
+            HttpHeaders headers = createHeaders(tv);
+            Map<String, Object> pathParams = new HashMap<>();
+            Map<String, Object> queryParams = new HashMap<>();
+            GetConvergenceListReq req = mapGetConvergenceListReq(tv);
+            ResponseEntity<GetConvergenceListResp> response = commonBEService.execute(
+                    logContext,
+                    HttpMethod.POST,
+                    Constant.ENDPOINT_SOURCE_SYSTEM_ID,
+                    "ProfileGetConvergenceListByProductId",
+                    GetConvergenceListResp.class,
+                    tv,
+                    headers,
+                    pathParams,
+                    queryParams,
+                    req
+            );
+            int httpCode = response.getStatusCode().value();
+
+            if (httpCode == HttpStatus.OK.value()) {
+                tv.put("getConvergenceListByProductId", response.getBody());
+            }
+
+            String errorCode = Constant.DEFAULT_NULL_EXCEPTION_VALUE;
+            if (response.getBody() != null && response.getBody().getStatus() != null) {
+                logContext.putA(LoggingKey.ENDPOINT_SRV_TX_ID, response.getBody().getStatus().getTransactionId());
+                errorCode = response.getBody().getStatus().getErrorCode();
+            }
+
+            EndpointResult endpointResult = resultService.mapEndpointResultCommonBE(tv, "PROFILE", "ProfileGetConvergenceListByProductId", errorCode, httpCode);
+            tv.put("endpointResult", endpointResult);
+            return endpointResult;
+        } catch (Exception exception) {
+            LoggerParameterUtil.error(log, exception);
+            return resultService.getEndpointExceptionResult(tv, exception);
+        }
+    }
+
+    private HttpHeaders createHeaders(Map<String, Object> tv) {
+        AccessTokenJWTPayload accessTokenJWTPayload = (AccessTokenJWTPayload) tv.get("x-customer-profile");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set(Constant.CUSTOMER_PROFILE, String.valueOf(accessTokenJWTPayload));
+        return headers;
+    }
+
+
+    private GetConvergenceListReq mapGetConvergenceListReq(Map<String, Object> tv) {
+        GetConvergenceListReq getConvergenceListReq = new GetConvergenceListReq();
+        getConvergenceListReq.setProductId((String) tv.getOrDefault("productId", ""));
+        getConvergenceListReq.setProductBrand(((String) tv.getOrDefault("brand", "")).toUpperCase());
+        return getConvergenceListReq;
+    }
+
+}

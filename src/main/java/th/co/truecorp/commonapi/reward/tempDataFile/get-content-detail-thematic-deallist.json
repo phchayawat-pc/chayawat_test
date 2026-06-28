@@ -1,0 +1,53 @@
+{
+  "code":"0",
+  "description":"Success",
+  "timestamp":"",
+  "content":{
+    "code":10001,
+    "platform_module":10001,
+    "report_dashboard":1,
+    "message":"Success",
+    "data":{
+      "display_country":"th",
+      "display_lang":"th",
+      "id":"RKaJ4xdjd9py",
+      "content_type":"trueyouarticle",
+      "original_id":null,
+      "title":"?????????????????? ?????? ??????????",
+      "article_category":[
+        "themetic"
+      ],
+      "thumb":"https://cms.dmpcdn.com/trueyouarticle/2024/04/15/5ffc6f00-faf3-11ee-b45a-b992d0fe1050_webp_original.webp",
+      "tags":null,
+      "status":"publish",
+      "count_views":null,
+      "publish_date":"",
+      "create_date":"",
+      "update_date":"",
+      "searchable":"Y",
+      "create_by":"supanita",
+      "create_by_ssoid":"72242009",
+      "update_by":"pishsinee.p",
+      "update_by_ssoid":"37183481",
+      "source_url":null,
+      "count_likes":null,
+      "count_ratings":null,
+      "source_country":"th",
+      "detail":"<h2 style=\"text-align: center;\"><span style=\"color: #000000;\"><strong>????????? ?????????????????????????????</strong></span></h2>",
+      "thumb_list":{
+        "highlight16x9":"https://cms.dmpcdn.com/trueyouarticle/2024/04/15/5ffc6f00-faf3-11ee-b45a-b992d0fe1050_webp_original.webp",
+        "image_coupon":"https://cms.dmpcdn.com/trueyouarticle/2024/04/15/5ffc6f00-faf3-11ee-b45a-b992d0fe1050_webp_original.webp"
+      },
+      "expire_date":null,
+      "setting":{
+        "shelf_id_1":"",
+        "shelf_ids":"",
+        "shelf_title_1":"",
+        "thematic_main_shelf_ids":"EvmyJ2XYQjqv",
+        "themetic_color":""
+      },
+      "term_and_condition":null,
+      "share_url":""
+    }
+  }
+}

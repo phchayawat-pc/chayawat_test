@@ -1,0 +1,89 @@
+{
+  "status": {
+    "statusType": "S",
+    "errorCode": "S-RWD-11111",
+    "errorMessage": "Successfully processed with data",
+    "errorDescription": null,
+    "hostId": null,
+    "transactionId": null
+  },
+  "data": {
+    "sectionId": "",
+    "lang": "TH",
+    "displayTypeCode": "QUICK_ICON",
+    "sectionItem": [
+      {
+        "itemNo": "1",
+        "itemName": "Point/Coin",
+        "itemDisplayName": "แลกด้วย Point/Coin",
+        "itemImageList": {
+          "imageIcon": "/rwd/image/poin-coin.png",
+          "image1x1": "",
+          "image3x2": "",
+          "image4x3": "",
+          "image16x9": "",
+          "image9x16": ""
+        },
+        "itemType": "SECTION",
+        "itemSubtype": "CATEGORY_PAGE",
+        "shelfType": "",
+        "itemMapping": "S202401-004",
+        "itemMapping2": ""
+      },
+      {
+        "itemNo": "2",
+        "itemName": "Game & Mission",
+        "itemDisplayName": "Game & Mission",
+        "itemImageList": {
+          "imageIcon": "/rwd/image/game-mission.png",
+          "image1x1": "",
+          "image3x2": "",
+          "image4x3": "",
+          "image16x9": "",
+          "image9x16": ""
+        },
+        "itemType": "WEB_LINK",
+        "itemSubtype": "",
+        "shelfType": "",
+        "itemMapping": "https://game.trueid.net/instantwin/scratch",
+        "itemMapping2": ""
+      },
+      {
+        "itemNo": "3",
+        "itemName": "Special Coupons",
+        "itemDisplayName": "Special Coupons",
+        "itemImageList": {
+          "imageIcon": "/rwd/image/specialcoupons.png",
+          "image1x1": "",
+          "image3x2": "",
+          "image4x3": "",
+          "image16x9": "",
+          "image9x16": ""
+        },
+        "itemType": "WEB_LINK",
+        "itemSubtype": "",
+        "shelfType": "",
+        "itemMapping": "https://privilege.trueid.net/en/coupons",
+        "itemMapping2": ""
+      },
+      {
+        "itemNo": "4",
+        "itemName": "History",
+        "itemDisplayName": "History",
+        "itemImageList": {
+          "imageIcon": "/rwd/image/history.png",
+          "image1x1": "",
+          "image3x2": "",
+          "image4x3": "",
+          "image16x9": "",
+          "image9x16": ""
+        },
+        "itemType": "DEEPLINK",
+        "itemSubtype": "",
+        "shelfType": "",
+        "itemMapping": "{deeplink to history page}",
+        "itemMapping2": ""
+      }
+    ]
+  }
+}

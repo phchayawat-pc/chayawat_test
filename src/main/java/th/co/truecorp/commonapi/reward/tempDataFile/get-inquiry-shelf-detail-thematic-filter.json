@@ -1,0 +1,75 @@
+{
+  "code":"0",
+  "description":"Success",
+  "timestamp":"",
+  "progressive_shelves":{
+    "code":10001,
+    "platform_module":10003,
+    "report_dashboard":0,
+    "message":"Success",
+    "pages":{
+      "page":1,
+      "limit":50,
+      "total_items":2,
+      "total_pages":1
+    },
+    "data":{
+      "title":"?????????????????  Master Shelf",
+      "status":"publish",
+      "publish_date":"",
+      "setting":{
+
+      },
+      "country":"th",
+      "content_type":"trueyouarticle",
+      "create_by":"supanita",
+      "create_by_ssoid":"72242009",
+      "create_date":"",
+      "update_date":"",
+      "update_by":"091*******",
+      "update_by_ssoid":"93383207",
+      "id":"EvmyJ2XYQjqv",
+      "shelf_items":[
+        {
+          "update_by_ssoid":"93383207",
+          "title":"????????????????? - Filter",
+          "create_by_ssoid":"37183481",
+          "update_date":"",
+          "setting":{
+            "title_th":"????????",
+            "title_my":"Categories",
+            "view_type":"thematic_filter",
+            "title_en":"Categories",
+            "id":"dNYJazq3q6WR"
+          },
+          "create_by":"pishsinee.p",
+          "content_type":"trueyouarticle",
+          "id":"dNYJazq3q6WR",
+          "create_date":"",
+          "update_by":"091*******",
+          "publish_date":"",
+          "status":"publish",
+          "item_type":"progressive_shelve"
+        },
+        {
+          "update_by_ssoid":"72242009",
+          "title":"????????????????? - MAIN SHELF",
+          "create_by_ssoid":"72242009",
+          "update_date":"",
+          "setting":{
+            "view_type":"thematic_main",
+            "id":"x4wKbr5gbyB4"
+          },
+          "create_by":"supanita",
+          "content_type":"trueyouarticle",
+          "id":"x4wKbr5gbyB4",
+          "create_date":"",
+          "update_by":"supanita",
+          "publish_date":"",
+          "status":"publish",
+          "item_type":"progressive_shelve"
+        }
+      ]
+    }
+  }
+}
