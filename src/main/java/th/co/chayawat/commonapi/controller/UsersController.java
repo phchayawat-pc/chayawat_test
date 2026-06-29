@@ -35,10 +35,10 @@ public class UsersController {
 
     @GetMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UsersDto> getUserById(
-            @RequestParam(value="userId") String userId
+            @PathVariable(value = "userId") Integer userId
     ) throws Exception {
-        System.out.println("getUserById");
-        UsersDto usersDto = null;
+        System.out.println("getUserById : "+userId);
+        UsersDto usersDto = userService.getUserById(userId);
         return new ResponseEntity<UsersDto>(usersDto, HttpStatus.OK);
     }
 
@@ -47,12 +47,13 @@ public class UsersController {
             @RequestBody UsersRsp body
     ) throws Exception {
         System.out.println("createUser");
-        return new ResponseEntity<UsersDto>(new UsersDto(), HttpStatus.OK);
+        UsersDto dto = userService.createUser(body);
+        return new ResponseEntity<UsersDto>(dto, HttpStatus.OK);
     }
 
     @PutMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UsersDto> editUser(
-            @RequestParam(value="userId") String userId,
+            @PathVariable(value="userId") String userId,
             @RequestBody UsersRsp body
     ) throws Exception {
         System.out.println("editUser");
@@ -61,8 +62,7 @@ public class UsersController {
 
     @DeleteMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> deleteUser(
-            @RequestParam(value="userId") String userId,
-            @RequestBody UsersRsp body
+            @PathVariable(value="userId") String userId
     ) throws Exception {
         System.out.println("deleteUser");
         return new ResponseEntity<String>(userId, HttpStatus.OK);

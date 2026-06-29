@@ -1,6 +1,7 @@
 package th.co.chayawat.commonapi.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -29,6 +30,9 @@ import javax.sql.DataSource;
 )
 public class DatabaseConfig {
 
+    @Autowired
+    private org.springframework.boot.autoconfigure.orm.jpa.JpaProperties jpaProperties;
+
     @Primary
     @Bean(name = "commonDatasource")
     @ConfigurationProperties("spring.datasource.db1")
@@ -40,12 +44,18 @@ public class DatabaseConfig {
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
                                                                        @Qualifier("commonDatasource") DataSource dataSource) {
+
+        // แปลงค่า properties ของ JPA ออกมาเป็น Map
+        java.util.Map<String, Object> properties = new java.util.HashMap<>(jpaProperties.getProperties());
+        // เพื่อความชัวร์ สั่งล็อกสเปกให้มันอัปเดต/สร้างตารางตรงนี้เลย
+        properties.put("hibernate.hbm2ddl.auto", "update");
+
         return builder.dataSource(dataSource)
-                // แก้ตรงนี้: เพิ่มแพ็กเกจ Entity ของทรูเข้าไปในรายการสแกนด้วย (คั่นด้วยเครื่องหมายจุลภาค ,)
                 .packages(
                         "th.co.chayawat.commonapi.cms.jpa.entity",
-                        "th.co.truecorp.commonlib.jpa.entity" // <-- เพิ่มบรรทัดนี้เข้ามาครับ
+                        "th.co.truecorp.commonlib.jpa.entity"
                 )
+                .properties(properties) // <-- ส่งค่า properties ที่มีคำสั่ง ddl-auto เข้าไปด้วย
                 .persistenceUnit("commonDatasource")
                 .build();
     }
