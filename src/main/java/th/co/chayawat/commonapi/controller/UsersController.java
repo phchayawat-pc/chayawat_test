@@ -53,19 +53,21 @@ public class UsersController {
 
     @PutMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UsersDto> editUser(
-            @PathVariable(value="userId") String userId,
+            @PathVariable(value="userId") Integer userId,
             @RequestBody UsersRsp body
     ) throws Exception {
         System.out.println("editUser");
-        return new ResponseEntity<UsersDto>(new UsersDto(), HttpStatus.OK);
+        UsersDto dto = userService.editUser(userId, body);
+        return new ResponseEntity<UsersDto>(dto, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deleteUser(
-            @PathVariable(value="userId") String userId
+    public ResponseEntity<Integer> deleteUser(
+            @PathVariable(value="userId") Integer userId
     ) throws Exception {
         System.out.println("deleteUser");
-        return new ResponseEntity<String>(userId, HttpStatus.OK);
+        userId = userService.deleteUser(userId);
+        return new ResponseEntity<Integer>(userId, HttpStatus.OK);
     }
 
 }

@@ -10,6 +10,7 @@ import th.co.chayawat.commonapi.cms.jpa.repository.UserRepository;
 import th.co.chayawat.commonapi.dto.UsersDto;
 import th.co.chayawat.commonapi.model.UsersRsp;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class UserService {
     }
 
     public UsersDto createUser(UsersRsp usersRsp){
-        System.out.println("Service : getUserById");
+        System.out.println("Service : createUser");
         Users user = new Users();
         user.setName(usersRsp.getName());
         user.setUsername(usersRsp.getUsername());
@@ -54,16 +55,24 @@ public class UserService {
         return usersDto;
     }
 
-    public UsersDto editUser(String userId, UsersRsp usersRsp){
-        System.out.println("Service : getUserById");
-        Users user = new Users();
+    public UsersDto editUser(Integer userId, UsersRsp usersRsp){
+        System.out.println("Service : editUser");
+        Users user = userRepository.getReferenceById(userId);
+        user.setName(usersRsp.getName());
+        user.setUsername(usersRsp.getUsername());
+        user.setEmail(usersRsp.getEmail());
+        user.setPhone(usersRsp.getPhone());
+        user.setWebsite(usersRsp.getWebsite());
+        user.setModifiedDate(new Timestamp(System.currentTimeMillis()));
         Users users = userRepository.save(user);
-        return null;
+        UsersDto usersDto = new UsersDto();
+        BeanUtils.copyProperties(users, usersDto);
+        return usersDto;
     }
 
-    public String deleteUser(String userId){
-        System.out.println("Service : getUserById");
-        userRepository.deleteById(Integer.parseInt(userId));
+    public Integer deleteUser(Integer userId){
+        System.out.println("Service : deleteUser");
+        userRepository.deleteById(userId);
         return userId;
     }
 
